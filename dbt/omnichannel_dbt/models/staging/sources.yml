@@ -1,14 +1,18 @@
 version: 2
 
 sources:
+  - - name: shopify
+    database: OMNICHANNEL_DB
+    schema: RAW
+    tables:
+      - name: customers
+      - name: orders
+      - name: order_items
+      - name: payments
+      - name: products
+
   - name: walmart
     database: OMNICHANNEL_DB
     schema: RAW
     tables:
       - name: walmart_sales
-
-  - name: shopify
-    database: OMNICHANNEL_DB
-    schema: RAW
-    tables:
-      - name: shopify_orders
