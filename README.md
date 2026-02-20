@@ -2,6 +2,8 @@
 
 End-to-end data pipeline merging Shopify (online) and Walmart (in-store) sales into a unified analytics-ready analytics model.
 
+🔗 Live Dashboard: https://lookerstudio.google.com/s/pkrTFDFjPBA
+
 🔎 Project Overview
 
 This project builds an integrated Omnichannel Sales Analytics Dashboard that consolidates historical in-store sales data (Walmart, 2010–2012) and online e-commerce sales data (Shopify, 2016–2018) into a unified analytical view.
