@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: fct_sales
+    description: "Unified sales fact table combining ONLINE (orders/order_items) + OFFLINE (walmart weekly sales)."
+    columns:
+      - name: sale_id
+        tests:
+          - not_null
+          - unique
+
+      - name: channel
+        tests:
+          - not_null
+
+      - name: sale_date
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_id
+
+      # ONLINE only: customer_id + product_id must exist in their dims
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+              where: "channel = 'ONLINE'"
+
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('dim_products')
+              field: product_id
+              where: "channel = 'ONLINE'"
+
+      # OFFLINE only: store_id must exist in dim_store
+      - name: store_id
+        tests:
+          - relationships:
+              to: ref('dim_store')
+              field: store_id
+              where: "channel = 'OFFLINE'"
+
+  - name: dim_date
+    columns:
+      - name: date_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_store
+    columns:
+      - name: store_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_customers
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_products
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
